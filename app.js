@@ -1,12 +1,22 @@
-let nodePath = process.argv[0];
-let appPath = process.argv[1];
-let name = process.argv[2];
-let age = process.argv[3];
-
-console.log("nodePath: " + nodePath);
-console.log("appPath: " + appPath);
-console.log();
-console.log("name: " + name);
-console.log("age: " + age);
-
-// node app.js Tom 23
+// Для работы с переданными данными внутри html-элементов применяются теги #{выражение}:
+const express = require("express");
+  
+const app = express();
+  
+app.set("view engine", "pug");
+ 
+app.use("/contact", function(request, response){
+      
+    response.render("contact", {
+        title: "Мои контакты",
+        emailsVisible: true,
+        emails: ["gavgav@mycorp.com", "mioaw@mycorp.com"],
+        phone: "+1234567890"
+    });
+}); 
+ 
+app.use("/", function(request, response){
+      
+    response.send("Главная страница");
+});
+app.listen(3000);
